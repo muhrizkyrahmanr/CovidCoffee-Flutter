@@ -73,7 +73,7 @@ class Bayar extends StatelessWidget {
                   right: 15.0,
                   top: 10.0,
                 ),
-                height: 130.0,
+                height: 170.0,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -108,10 +108,30 @@ class Bayar extends StatelessWidget {
                       ),
                       trailing: payment == 'Cash' ? Icon(
                         Icons.check_box,
-                        color: Colors.green[600],
+                        color: Colors.blue[600],
                       ) : Icon(Icons.check_box_outline_blank),
                       title: Text(
                         "Cash",
+                        style: TextStyle(
+                          fontSize: 13.0,
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {
+                        SessionManager().setSessionPayment('Transfer');
+                        getPayment();
+                        Navigator.pop(context);
+                      },
+                      leading: Icon(
+                        Icons.payment,
+                      ),
+                      trailing: payment == 'Transfer' ? Icon(
+                        Icons.check_box,
+                        color: Colors.blue[600],
+                      ) : Icon(Icons.check_box_outline_blank),
+                      title: Text(
+                        "Transfer",
                         style: TextStyle(
                           fontSize: 13.0,
                         ),
