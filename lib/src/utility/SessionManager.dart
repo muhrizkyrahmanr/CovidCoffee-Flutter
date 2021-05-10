@@ -90,4 +90,27 @@ class SessionManager {
     preferences.remove("payment");
     preferences.remove("hasDataPayment");
   }
+
+  setSessionJenisPesanan(String jenisPesanan) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("jenisPesanan", jenisPesanan);
+    preferences.setBool("hasDatajenisPesanan", true);
+  }
+
+  getSessionJenisPesanan() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    Map data = {
+      'jenisPesanan': preferences.getString('jenisPesanan') ?? 'Jenis pesanan belum dipilih',
+      'hasDatajenisPesanan': preferences.getBool('hasDatajenisPesanan') ?? false,
+    };
+
+    return data;
+  }
+
+  removeSessionJenisPesanan() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove("jenisPesanan");
+    preferences.remove("hasDatajenisPesanan");
+  }
 }

@@ -4,6 +4,7 @@ import 'package:covidcoffee/src/ui/widget/pemesanan/Alamat.dart';
 import 'package:covidcoffee/src/ui/widget/pemesanan/AppBar.dart';
 import 'package:covidcoffee/src/ui/widget/pemesanan/Bayar.dart';
 import 'package:covidcoffee/src/ui/widget/pemesanan/Catatan.dart';
+import 'package:covidcoffee/src/ui/widget/pemesanan/JenisPesanan.dart';
 import 'package:covidcoffee/src/ui/widget/pemesanan/ListPesanan.dart';
 import 'package:covidcoffee/src/utility/SessionManager.dart';
 import 'package:flutter/material.dart';
@@ -29,13 +30,14 @@ class _PemesananState extends State<Pemesanan> {
   String alamat;
   String wilayah_pengiriman;
   String payment;
+  String jenisPesanan;
   int isBayar;
   int totalBayar = 0;
   int totalOngkir = 0;
   bool isKirim = false;
   bool validAlamat;
   bool validPayment;
-  int id = 0;
+  bool validjenisPesanan;
   bool isAlamatPengiriman = false;
 
   @override
@@ -45,6 +47,7 @@ class _PemesananState extends State<Pemesanan> {
     _getAddress();
     _getPayment();
     _getTotalBayar();
+    _getJenisPesanan();
   }
 
   @override
@@ -82,60 +85,13 @@ class _PemesananState extends State<Pemesanan> {
                                 fontFamily: 'Varela',
                                 fontSize: 12.0,
                               ),
-                              textAlign: TextAlign.start,
+                              textAlign: TextAlign.center,
                             ),
                           ),
-                          Card(
-                            elevation: 1.0,
-                            margin: EdgeInsets.only(
-                              top: 5.0,
-                              bottom: 5.0,
-                              left: 15.0,
-                              right: 15.0,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                5.0,
-                              ),
-                            ),
-                            child: Row(
-                              children: <Widget>[
-                                Radio(
-                                  value: 1,
-                                  groupValue: id,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      id = 1;
-                                      isAlamatPengiriman = false;
-                                    });
-                                  },
-                                ),
-                                Text(
-                                  'Jemput',
-                                  style: TextStyle(
-                                    fontFamily: 'Varela',
-                                    fontSize: 14.0,
-                                  ),
-                                ),
-                                Radio(
-                                  value: 2,
-                                  groupValue: id,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      id = 2;
-                                      isAlamatPengiriman = true;
-                                    });
-                                  },
-                                ),
-                                Text(
-                                  'Antar',
-                                  style: TextStyle(
-                                    fontFamily: 'Varela',
-                                    fontSize: 14.0,
-                                  ),
-                                )
-                              ],
-                            ),
+                          JenisPesanan(
+                            jenisPesanan: jenisPesanan,
+                            getJenisPesanan: _getJenisPesanan,
+                            getreloadPemesanan:_reloadPemesanan,
                           ),
                           new Visibility(
                             visible: isAlamatPengiriman == true ? true : false,
@@ -271,7 +227,10 @@ class _PemesananState extends State<Pemesanan> {
                             child: InkWell(
                               borderRadius: BorderRadius.circular(5.0),
                               onTap: () {
-                                if (!validAlamat) {
+                                if(!validjenisPesanan){
+                                  Fluttertoast.showToast(
+                                      msg: "Jenis pesanan belum dipilih");
+                                } else if (!validAlamat && jenisPesanan == "Antar") {
                                   Fluttertoast.showToast(
                                       msg: "Alamat kirim belum dipilih");
                                 } else if (!validPayment) {
@@ -329,6 +288,20 @@ class _PemesananState extends State<Pemesanan> {
     setState(() {
       payment = _result['payment'];
       validPayment = _result['hasDataPayment'];
+    });
+  }
+
+  _getJenisPesanan() async {
+    Map _result = await SessionManager().getSessionJenisPesanan();
+
+    setState(() {
+      jenisPesanan = _result['jenisPesanan'];
+      validjenisPesanan = _result['hasDatajenisPesanan'];
+      if(jenisPesanan == "Jemput"){
+        isAlamatPengiriman = false;
+      }else if(jenisPesanan == "Antar"){
+        isAlamatPengiriman = true;
+      }
     });
   }
 

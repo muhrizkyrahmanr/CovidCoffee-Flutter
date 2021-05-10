@@ -1,13 +1,15 @@
 import 'package:covidcoffee/src/utility/SessionManager.dart';
 import 'package:flutter/material.dart';
 
-class Bayar extends StatelessWidget {
-  String payment;
-  VoidCallback getPayment;
+class JenisPesanan extends StatelessWidget {
+  String jenisPesanan;
+  VoidCallback getJenisPesanan;
+  VoidCallback getreloadPemesanan;
 
-  Bayar({
-    this.payment,
-    this.getPayment,
+  JenisPesanan({
+    this.jenisPesanan,
+    this.getJenisPesanan,
+    this.getreloadPemesanan,
   });
 
   @override
@@ -25,7 +27,7 @@ class Bayar extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          showModalPembayaran(context);
+          showModalPesanan(context);
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -33,7 +35,7 @@ class Bayar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget> [
               Icon(
-                payment == "Cash" ? Icons.attach_money : Icons.payment,
+                jenisPesanan == "Jemput" ? Icons.store : Icons.delivery_dining,
                 color: Colors.grey,
               ),
               SizedBox(
@@ -49,7 +51,7 @@ class Bayar extends StatelessWidget {
                         color: Colors.grey[800],
                         fontSize: 13.0,
                       ),
-                      text: payment,
+                      text: jenisPesanan,
                     ),
                   )
               )
@@ -60,7 +62,7 @@ class Bayar extends StatelessWidget {
     );
   }
 
-  void showModalPembayaran(BuildContext context) {
+  void showModalPesanan(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -87,7 +89,7 @@ class Bayar extends StatelessWidget {
                                    bottom: 10.0,
                                  ),
                                  child: Text(
-                                   "Metode Pembayaran",
+                                   "Jenis Pesanan",
                                    style: TextStyle(
                                      color: Colors.lightBlue[800],
                                      fontSize: 18.0,
@@ -99,19 +101,20 @@ class Bayar extends StatelessWidget {
                        ),
                     ListTile(
                       onTap: () {
-                        SessionManager().setSessionPayment('Cash');
-                        getPayment();
+                        SessionManager().setSessionJenisPesanan('Jemput');
+                        getJenisPesanan();
                         Navigator.pop(context);
+                        getreloadPemesanan();
                       },
                       leading: Icon(
-                        Icons.attach_money,
+                        Icons.store,
                       ),
-                      trailing: payment == 'Cash' ? Icon(
+                      trailing: jenisPesanan == 'Jemput' ? Icon(
                         Icons.check_box,
                         color: Colors.blue[600],
                       ) : Icon(Icons.check_box_outline_blank),
                       title: Text(
-                        "Cash",
+                        "Jemput",
                         style: TextStyle(
                           fontSize: 13.0,
                         ),
@@ -119,19 +122,20 @@ class Bayar extends StatelessWidget {
                     ),
                     ListTile(
                       onTap: () {
-                        SessionManager().setSessionPayment('Transfer');
-                        getPayment();
+                        SessionManager().setSessionJenisPesanan('Antar');
+                        getJenisPesanan();
                         Navigator.pop(context);
+                        getreloadPemesanan();
                       },
                       leading: Icon(
-                        Icons.payment,
+                        Icons.delivery_dining,
                       ),
-                      trailing: payment == 'Transfer' ? Icon(
+                      trailing: jenisPesanan == 'Antar' ? Icon(
                         Icons.check_box,
                         color: Colors.blue[600],
                       ) : Icon(Icons.check_box_outline_blank),
                       title: Text(
-                        "Transfer",
+                        "Antar",
                         style: TextStyle(
                           fontSize: 13.0,
                         ),
