@@ -217,12 +217,17 @@ class _ListPesananState extends State<ListPesanan> {
   }
 
   _getListPesanan() async{
-    Map _result = await SessionManager().getSessionAddress();
+    String jenis_pesanan = null;
     String wilayah_pengiriman = null;
-    if(_result['wilayah_pengiriman'] != "Wilayah pengiriman belum terisi") {
-      wilayah_pengiriman = _result['wilayah_pengiriman'];
+    Map _result = await SessionManager().getSessionJenisPesanan();
+    jenis_pesanan = _result['jenisPesanan'];
+    if(_result['jenisPesanan'] == "Antar") {
+      Map _resultt = await SessionManager().getSessionAddress();
+      if (_resultt['wilayah_pengiriman'] != "Wilayah pengiriman belum terisi") {
+        wilayah_pengiriman = _resultt['wilayah_pengiriman'];
+      }
     }
-    // Fluttertoast.showToast(msg: wilayah_pengiriman);
-    listPesananBloc.getListPesanan(widget.id_pelanggan, wilayah_pengiriman);
+    listPesananBloc.getListPesanan(widget.id_pelanggan, jenis_pesanan, wilayah_pengiriman);
+
   }
 }

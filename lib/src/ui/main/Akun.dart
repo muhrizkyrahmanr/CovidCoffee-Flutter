@@ -545,6 +545,9 @@ class _AkunState extends State<Akun> {
                   color: Colors.red,
                   onPressed: () {
                     SessionManager().removeSession();
+                    SessionManager().removeSessionAddress();
+                    SessionManager().removeSessionPayment();
+                    SessionManager().removeSessionJenisPesanan();
                     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
                       builder: (context) => MainNavigation(),
                     ), (route) => false);

@@ -26,16 +26,17 @@ class KeranjangProvider{
     }
   }
 
-  Future<List<KeranjangModel>> getListPesanan(String id_pelanggan, String wilayah_pengiriman) async {
+  Future<List<KeranjangModel>> getListPesanan(String id_pelanggan, String jenis_pesanan,String wilayah_pengiriman) async {
     var uri = Uri.parse(BaseURL.Keranjang);
 
-    if(id_pelanggan == "Wilayah pengiriman belum terisi" || wilayah_pengiriman == "") {
+    if((jenis_pesanan == "Jemput" || jenis_pesanan == "") && (id_pelanggan == "Wilayah pengiriman belum terisi" || wilayah_pengiriman == "")) {
       uri = uri.replace(queryParameters: <String, String>{
         'id_pelanggan': id_pelanggan,
       });
     }else{
       uri = uri.replace(queryParameters: <String, String>{
         'id_pelanggan': id_pelanggan,
+        'jenis_pesanan': jenis_pesanan,
         'wilayah_pengiriman': wilayah_pengiriman,
       });
     }

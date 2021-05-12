@@ -306,13 +306,18 @@ class _PemesananState extends State<Pemesanan> {
   }
 
   _getTotalBayar() async {
-    Map _result = await SessionManager().getSessionAddress();
+    String jenis_pesanan = null;
     String wilayah_pengiriman = null;
-    if (_result['wilayah_pengiriman'] != "Wilayah pengiriman belum terisi") {
-      wilayah_pengiriman = _result['wilayah_pengiriman'];
+    Map _result = await SessionManager().getSessionJenisPesanan();
+    jenis_pesanan = _result['jenisPesanan'];
+    if(_result['jenisPesanan'] == "Antar") {
+      Map _resultt = await SessionManager().getSessionAddress();
+      if (_resultt['wilayah_pengiriman'] != "Wilayah pengiriman belum terisi") {
+        wilayah_pengiriman = _resultt['wilayah_pengiriman'];
+      }
     }
-    final res = await transaksiBloc.getTotalBayar(
-        widget.id_pelanggan, wilayah_pengiriman);
+
+    final res = await transaksiBloc.getTotalBayar(widget.id_pelanggan, jenis_pesanan, wilayah_pengiriman);
     bool status = res['status'];
     String message = res['message'];
 
@@ -345,6 +350,7 @@ class _PemesananState extends State<Pemesanan> {
 
     Map<String, String> data = {
       'total_bayar': (totalBayar + totalOngkir).toString(),
+      'jenis_pesanan': jenisPesanan,
       'alamat_kirim': alamat,
       'latitude': lat.toString(),
       'longtitude': lng.toString(),
@@ -354,7 +360,6 @@ class _PemesananState extends State<Pemesanan> {
       'ongkir': totalOngkir.toString(),
       'wilayah_pengiriman': _result['wilayah_pengiriman'],
     };
-
     final result = await transaksiBloc.kirimPesanan(data);
 
     if (result['status']) {
@@ -363,6 +368,8 @@ class _PemesananState extends State<Pemesanan> {
       });
 
       SessionManager().removeSessionPayment();
+      SessionManager().removeSessionJenisPesanan();
+      SessionManager().removeSessionAddress();
       Fluttertoast.showToast(msg: result['message']);
 
       Navigator.pushAndRemoveUntil(

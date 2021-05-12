@@ -10,8 +10,8 @@ class ListPesananBloc{
   Observable<List<KeranjangModel>> get countListPesanan => _getAllListPesanan.stream;
 
 
-  getListPesanan(String id_pelanggan, String wilayah_pengiriman) async{
-    List<KeranjangModel> produk = await _pesananRepo.getListPesanan(id_pelanggan, wilayah_pengiriman);
+  getListPesanan(String id_pelanggan, String jenis_pesanan, String wilayah_pengiriman) async{
+    List<KeranjangModel> produk = await _pesananRepo.getListPesanan(id_pelanggan, jenis_pesanan, wilayah_pengiriman);
     _getAllListPesanan.sink.add(produk);
   }
 

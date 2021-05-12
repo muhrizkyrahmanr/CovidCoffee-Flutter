@@ -15,7 +15,11 @@ class StatusPesanan extends StatelessWidget {
     Color statusColor;
     IconData statusIcon;
 
-    if (status == "Dipesan") {
+    if (status == "Belum Dibayar") {
+      isStatus = 'Pesanan Belum Dibayar';
+      statusColor = Colors.red;
+      statusIcon = Icons.attach_money;
+    }else if (status == "Dipesan") {
       isStatus = 'Pesanan Belum Diproses';
       statusColor = Colors.orange;
       statusIcon = Icons.assignment_late;

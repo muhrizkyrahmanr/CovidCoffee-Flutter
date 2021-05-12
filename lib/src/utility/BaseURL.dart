@@ -1,5 +1,5 @@
 class BaseURL{
-  static String domain = "http://192.168.1.9/CovidCoffee/api/";
+  static String domain = "http://192.168.1.10/CovidCoffee/api/";
 
   static String Produk = domain + "produk";
   static String Login = domain + "login";

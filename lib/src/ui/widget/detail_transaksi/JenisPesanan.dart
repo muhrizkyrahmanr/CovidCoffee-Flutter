@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class Bayar extends StatelessWidget {
-  String payment;
+class JenisPesanan extends StatelessWidget {
+  String jenisPesanan;
 
-  Bayar({
-    this.payment,
+  JenisPesanan({
+    this.jenisPesanan,
   });
 
   @override
@@ -26,7 +26,7 @@ class Bayar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget> [
             Icon(
-              payment == "Cash" ? Icons.attach_money : Icons.payment,
+              jenisPesanan == "Jemput" ? Icons.store : Icons.delivery_dining,
               color: Colors.grey,
             ),
             SizedBox(
@@ -42,7 +42,7 @@ class Bayar extends StatelessWidget {
                       color: Colors.grey[800],
                       fontSize: 13.0,
                     ),
-                    text: payment,
+                    text: jenisPesanan,
                   ),
                 )
             )

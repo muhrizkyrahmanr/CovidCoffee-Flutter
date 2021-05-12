@@ -12,8 +12,8 @@ class TransaksiBloc{
   final _getListProdukTransaksi = PublishSubject<List<ListProdukTransaksiModel>>();
   Stream<List<ListProdukTransaksiModel>> get countListProdukTransaksi => _getListProdukTransaksi.stream;
 
-  getTotalBayar(String id_pelanggan, String wilayah_pengiriman){
-    return _repo.getTotalBayar(id_pelanggan, wilayah_pengiriman);
+  getTotalBayar(String id_pelanggan, String jenis_pesanan, String wilayah_pengiriman){
+    return _repo.getTotalBayar(id_pelanggan, jenis_pesanan, wilayah_pengiriman);
   }
 
   kirimPesanan(Map<String, String> data){

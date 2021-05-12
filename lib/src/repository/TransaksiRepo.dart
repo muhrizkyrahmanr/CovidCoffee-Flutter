@@ -5,8 +5,8 @@ import 'package:covidcoffee/src/provider/TransaksiProvider.dart';
 class TransaksiRepo{
   final _provider = TransaksiProvider();
 
-  Future getTotalBayar(String id_pelanggan, String wilayah_pengiriman){
-    return _provider.getTotalBayar(id_pelanggan,wilayah_pengiriman);
+  Future getTotalBayar(String id_pelanggan, String jenis_pesanan, String wilayah_pengiriman){
+    return _provider.getTotalBayar(id_pelanggan, jenis_pesanan, wilayah_pengiriman);
   }
 
   Future kirimPesanan(Map<String, String> data){

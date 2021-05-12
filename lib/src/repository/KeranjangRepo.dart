@@ -8,8 +8,8 @@ class KeranjangRepo{
     return _cartProvider.getKeranjang(id_pelanggan);
   }
 
-  Future<List<KeranjangModel>> getListPesanan(String id_pelanggan, String wilayah_pengiriman){
-    return _cartProvider.getListPesanan(id_pelanggan, wilayah_pengiriman);
+  Future<List<KeranjangModel>> getListPesanan(String id_pelanggan, String jenis_pesanan, String wilayah_pengiriman){
+    return _cartProvider.getListPesanan(id_pelanggan, jenis_pesanan, wilayah_pengiriman);
   }
 
   Future tambahKeranjang(Map<String, String> data){

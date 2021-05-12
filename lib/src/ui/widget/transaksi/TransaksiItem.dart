@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 Widget TransaksiItem({BuildContext context, AsyncSnapshot<List<TransaksiModel>> snapshot}){
   return Container(
-    margin: EdgeInsets.only(bottom: 60.0,),
     child: ListView.builder(
       scrollDirection: Axis.vertical,
       itemCount: snapshot.data.length,
@@ -15,7 +14,10 @@ Widget TransaksiItem({BuildContext context, AsyncSnapshot<List<TransaksiModel>> 
         Color statusColor;
         IconData statusIcon;
 
-        if (data.status_transaksi == "Dipesan") {
+        if (data.status_transaksi == "Belum Dibayar") {
+          statusColor = Colors.red;
+          statusIcon = Icons.attach_money;
+        }else if (data.status_transaksi == "Dipesan") {
           statusColor = Colors.orange;
           statusIcon = Icons.assignment_late;
         } else if (data.status_transaksi == "Diproses") {
@@ -39,6 +41,7 @@ Widget TransaksiItem({BuildContext context, AsyncSnapshot<List<TransaksiModel>> 
                   kode_transaksi: data.kode_transaksi,
                   tanggal_transaksi: data.tanggal_transaksi,
                   total_bayar: data.total_bayar,
+                  jenis_pesanan: data.jenis_pesanan,
                   alamat_lengkap: data.alamat_lengkap,
                   status_transaksi: data.status_transaksi,
                   note: data.note,
@@ -130,7 +133,7 @@ Widget TransaksiItem({BuildContext context, AsyncSnapshot<List<TransaksiModel>> 
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
                           ),
-                          text: '${data.alamat_lengkap}',
+                          text:  data.jenis_pesanan == "Jemput" ? 'Jemput atau Ambil di Toko' : '${data.alamat_lengkap}',
                         ),
                       ),
 

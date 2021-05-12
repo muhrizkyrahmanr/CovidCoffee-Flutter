@@ -9,6 +9,7 @@ class TransaksiModel {
   String kode_transaksi;
   String tanggal_transaksi;
   String total_bayar;
+  String jenis_pesanan;
   String alamat_lengkap;
   String status_transaksi;
   String note;
@@ -22,6 +23,7 @@ class TransaksiModel {
       this.kode_transaksi,
       this.tanggal_transaksi,
       this.total_bayar,
+      this.jenis_pesanan,
       this.alamat_lengkap,
       this.status_transaksi,
       this.note,
@@ -36,6 +38,7 @@ class TransaksiModel {
     kode_transaksi: json['kode_transaksi'],
     tanggal_transaksi: json['tanggal_transaksi'],
     total_bayar: json['total_bayar'],
+    jenis_pesanan: json['jenis_pesanan'],
     alamat_lengkap: json['alamat_lengkap'],
     status_transaksi: json['status_transaksi'],
     note: json['note'],
@@ -50,6 +53,7 @@ class TransaksiModel {
     'kode_transaksi': kode_transaksi,
     'tanggal_transaksi': tanggal_transaksi,
     'total_bayar': total_bayar,
+    'jenis_pesanan': jenis_pesanan,
     'alamat_lengkap': alamat_lengkap,
     'status_transaksi': status_transaksi,
     'note': note,

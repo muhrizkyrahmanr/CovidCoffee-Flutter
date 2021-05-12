@@ -6,6 +6,7 @@ import 'package:covidcoffee/src/ui/widget/detail_transaksi/Catatan.dart';
 import 'package:covidcoffee/src/ui/widget/detail_transaksi/Alamat.dart';
 import 'package:covidcoffee/src/ui/widget/detail_transaksi/Pengirim.dart';
 import 'package:covidcoffee/src/ui/widget/detail_transaksi/StatusPesanan.dart';
+import 'package:covidcoffee/src/ui/widget/detail_transaksi/JenisPesanan.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -13,6 +14,7 @@ class DetailTransaksi extends StatefulWidget {
   String kode_transaksi;
   String tanggal_transaksi;
   String total_bayar;
+  String jenis_pesanan;
   String alamat_lengkap;
   String status_transaksi;
   String note;
@@ -26,6 +28,7 @@ class DetailTransaksi extends StatefulWidget {
       this.kode_transaksi,
       this.tanggal_transaksi,
       this.total_bayar,
+      this.jenis_pesanan,
       this.alamat_lengkap,
       this.status_transaksi,
       this.note,
@@ -77,16 +80,42 @@ class _DetailTransaksiState extends State<DetailTransaksi> {
                         top: 10.0,
                       ),
                       child: Text(
-                        'Alamat Pengiriman',
+                        'Jenis Pesanan',
                         style: TextStyle(
                           fontFamily: 'Varela',
                           fontSize: 12.0,
                         ),
-                        textAlign: TextAlign.start,
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                    Alamat(
-                      alamat: widget.alamat_lengkap,
+                    JenisPesanan(
+                      jenisPesanan: widget.jenis_pesanan,
+                    ),
+                    new Visibility(
+                      visible: widget.jenis_pesanan == "Antar" ? true : false,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 15.0,
+                              right: 15.0,
+                              top: 10.0,
+                            ),
+                            child: Text(
+                              'Alamat Pengiriman',
+                              style: TextStyle(
+                                fontFamily: 'Varela',
+                                fontSize: 12.0,
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                          Alamat(
+                            alamat: widget.alamat_lengkap,
+                          ),
+                        ],
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
