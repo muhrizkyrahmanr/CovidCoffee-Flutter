@@ -9,6 +9,14 @@ import 'package:flutter/material.dart';
 import 'Login.dart';
 
 class Home extends StatefulWidget {
+  String loadPage;
+  String id_pelanggan;
+
+  Home({
+    this.loadPage,
+    this.id_pelanggan
+  });
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -89,7 +97,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Login(),
+                      builder: (context) => Login(
+                        loadPage: "Keranjang",
+                      ),
                     ),
                         (route) => false,
                   );

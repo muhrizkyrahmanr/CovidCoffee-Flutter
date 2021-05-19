@@ -47,6 +47,7 @@ Widget TransaksiItem({BuildContext context, AsyncSnapshot<List<TransaksiModel>> 
                   note: data.note,
                   note_cancel: data.note_cancel,
                   pembayaran: data.pembayaran,
+                  foto_bukti_pembayaran: data.foto_bukti_pembayaran,
                   ongkos_kirim: data.ongkos_kirim,
                   id_pelanggan: data.id_pelanggan,
                   pengirim: data.pengirim,

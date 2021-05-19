@@ -20,6 +20,7 @@ class DetailTransaksi extends StatefulWidget {
   String note;
   String note_cancel;
   String pembayaran;
+  String foto_bukti_pembayaran;
   String ongkos_kirim;
   String id_pelanggan;
   String pengirim;
@@ -34,6 +35,7 @@ class DetailTransaksi extends StatefulWidget {
       this.note,
       this.note_cancel,
       this.pembayaran,
+      this.foto_bukti_pembayaran,
       this.ongkos_kirim,
       this.id_pelanggan,
       this.pengirim
@@ -63,16 +65,6 @@ class _DetailTransaksiState extends State<DetailTransaksi> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    StatusPesanan(
-                      status: widget.status_transaksi,
-                      kode_transaksi: widget.kode_transaksi
-                    ),
-                    if(widget.status_transaksi == "Dibatalkan") CatatanPembatalan(
-                      noteCancel: widget.note_cancel,
-                    ),
-                    if(widget.status_transaksi == "Dikirim" || widget.status_transaksi == "Diterima") Pengirim(
-                      pengirim: widget.pengirim,
-                    ),
                     Padding(
                       padding: const EdgeInsets.only(
                         left: 15.0,
@@ -80,16 +72,25 @@ class _DetailTransaksiState extends State<DetailTransaksi> {
                         top: 10.0,
                       ),
                       child: Text(
-                        'Jenis Pesanan',
+                        'Jenis Pesanan #'+widget.kode_transaksi,
                         style: TextStyle(
                           fontFamily: 'Varela',
                           fontSize: 12.0,
                         ),
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.start,
                       ),
                     ),
                     JenisPesanan(
                       jenisPesanan: widget.jenis_pesanan,
+                    ),
+                    StatusPesanan(
+                        status: widget.status_transaksi
+                    ),
+                    if(widget.status_transaksi == "Dibatalkan") CatatanPembatalan(
+                      noteCancel: widget.note_cancel,
+                    ),
+                    if(widget.status_transaksi == "Dikirim" || widget.status_transaksi == "Diterima") Pengirim(
+                      pengirim: widget.pengirim,
                     ),
                     new Visibility(
                       visible: widget.jenis_pesanan == "Antar" ? true : false,
@@ -155,6 +156,7 @@ class _DetailTransaksiState extends State<DetailTransaksi> {
                     ),
                     Bayar(
                       payment: widget.pembayaran,
+                      foto_bukti_pembayaran: widget.foto_bukti_pembayaran,
                     ),
                     Catatan(
                       note: widget.note,

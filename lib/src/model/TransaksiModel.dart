@@ -15,6 +15,7 @@ class TransaksiModel {
   String note;
   String note_cancel;
   String pembayaran;
+  String foto_bukti_pembayaran;
   String ongkos_kirim;
   String id_pelanggan;
   String pengirim;
@@ -29,6 +30,7 @@ class TransaksiModel {
       this.note,
       this.note_cancel,
       this.pembayaran,
+      this.foto_bukti_pembayaran,
       this.ongkos_kirim,
       this.id_pelanggan,
       this.pengirim
@@ -44,6 +46,7 @@ class TransaksiModel {
     note: json['note'],
     note_cancel: json['note_cancel'],
     pembayaran: json['pembayaran'],
+    foto_bukti_pembayaran: json['foto_bukti_pembayaran'],
     ongkos_kirim: json['ongkos_kirim'],
     id_pelanggan: json['id_pelanggan'],
     pengirim: json['pengirim'],
@@ -59,6 +62,7 @@ class TransaksiModel {
     'note': note,
     'note_cancel': note_cancel,
     'pembayaran': pembayaran,
+    'foto_bukti_pembayaran': foto_bukti_pembayaran,
     'ongkos_kirim': ongkos_kirim,
     'id_pelanggan': id_pelanggan,
     'pengirim': pengirim,

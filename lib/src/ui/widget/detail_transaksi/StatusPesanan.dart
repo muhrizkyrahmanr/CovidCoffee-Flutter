@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 
 class StatusPesanan extends StatelessWidget {
   String status;
-  String kode_transaksi;
 
   StatusPesanan({
     this.status,
-    this.kode_transaksi
   });
 
   @override
@@ -51,7 +49,7 @@ class StatusPesanan extends StatelessWidget {
               top: 10.0,
             ),
           child: Text(
-            'Status Pesanan #'+kode_transaksi,
+            'Status Pesanan',
             style: TextStyle(
               fontFamily: 'Varela',
               fontSize: 12.0,

@@ -8,6 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Register extends StatefulWidget {
+  String loadPage;
+
+  Register({
+    this.loadPage
+  });
+
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -673,12 +679,18 @@ class _RegisterState extends State<Register> {
       });
 
       SessionManager().setSession(res['data']['id'].toString(),res['data']['nama'],res['data']['no_telp'],res['data']['email']);
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MainNavigation(),
+      if(widget.loadPage == "Transaksi" || widget.loadPage == "Akun"){
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+          builder: (context) => MainNavigation(
+            loadPage: widget.loadPage,
+            id_pelanggan: res['data']['id'].toString(),
           ),
-          (route) => false);
+        ), (route) => false);
+      }else {
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+          builder: (context) => MainNavigation(),
+        ), (route) => false);
+      }
     } else {
       print(message);
 

@@ -1,4 +1,5 @@
 import 'package:covidcoffee/src/bloc/AuthBloc.dart';
+import 'package:covidcoffee/src/ui/main/Akun.dart';
 import 'package:covidcoffee/src/ui/main/MainNavigation.dart';
 import 'package:covidcoffee/src/ui/main/Register.dart';
 import 'package:covidcoffee/src/utility/SessionManager.dart';
@@ -7,6 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Login extends StatefulWidget {
+  String loadPage;
+
+  Login({
+    this.loadPage
+  });
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -304,7 +311,9 @@ class _LoginState extends State<Login> {
         InkWell(
           onTap: () {
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                builder: (context) => Register()
+                builder: (context) => Register(
+                  loadPage: widget.loadPage,
+                )
             ), (route) => false);
           },
           child: Text(
@@ -372,9 +381,18 @@ class _LoginState extends State<Login> {
       });
 
       SessionManager().setSession(res['data']['id'].toString(),res['data']['nama'],res['data']['no_telp'],res['data']['email']);
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-        builder: (context) => MainNavigation(),
-      ), (route) => false);
+      if(widget.loadPage == "Transaksi" || widget.loadPage == "Akun" || widget.loadPage == "Keranjang"){
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+          builder: (context) => MainNavigation(
+            loadPage: widget.loadPage,
+            id_pelanggan: res['data']['id'].toString(),
+          ),
+        ), (route) => false);
+      }else {
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+          builder: (context) => MainNavigation(),
+        ), (route) => false);
+      }
     }else{
       print(message);
 
