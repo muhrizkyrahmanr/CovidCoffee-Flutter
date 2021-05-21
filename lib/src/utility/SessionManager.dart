@@ -64,6 +64,7 @@ class SessionManager {
     preferences.remove('latitude');
     preferences.remove("longitude");
     preferences.remove("alamat");
+    preferences.remove("wilayah_pengiriman");
     preferences.remove("hasDataAlamat");
   }
 

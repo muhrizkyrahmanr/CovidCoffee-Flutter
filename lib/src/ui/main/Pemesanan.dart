@@ -293,7 +293,6 @@ class _PemesananState extends State<Pemesanan> {
 
   _getJenisPesanan() async {
     Map _result = await SessionManager().getSessionJenisPesanan();
-
     setState(() {
       jenisPesanan = _result['jenisPesanan'];
       validjenisPesanan = _result['hasDatajenisPesanan'];
@@ -308,6 +307,8 @@ class _PemesananState extends State<Pemesanan> {
   _getTotalBayar() async {
     String jenis_pesanan = null;
     String wilayah_pengiriman = null;
+    String latitude = null;
+    String longitude = null;
     Map _result = await SessionManager().getSessionJenisPesanan();
     jenis_pesanan = _result['jenisPesanan'];
     if(_result['jenisPesanan'] == "Antar") {
@@ -315,9 +316,13 @@ class _PemesananState extends State<Pemesanan> {
       if (_resultt['wilayah_pengiriman'] != "Wilayah pengiriman belum terisi") {
         wilayah_pengiriman = _resultt['wilayah_pengiriman'];
       }
+      if((lat != 0.0) && (lng != 0.0)){
+        latitude = lat.toString();
+        longitude = lng.toString();
+      }
     }
 
-    final res = await transaksiBloc.getTotalBayar(widget.id_pelanggan, jenis_pesanan, wilayah_pengiriman);
+    final res = await transaksiBloc.getTotalBayar(widget.id_pelanggan, jenis_pesanan, wilayah_pengiriman, latitude, longitude);
     bool status = res['status'];
     String message = res['message'];
 

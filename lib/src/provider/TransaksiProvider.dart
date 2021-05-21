@@ -9,13 +9,15 @@ import 'package:http/http.dart';
 class TransaksiProvider{
   Client client = Client();
 
-  Future<dynamic> getTotalBayar(String id_pelanggan, String jenis_pesanan, String wilayah_pengiriman) async{
+  Future<dynamic> getTotalBayar(String id_pelanggan, String jenis_pesanan, String wilayah_pengiriman, String latitude, String longitude) async{
     var uri = Uri.parse(BaseURL.TotalBayar);
 
     uri = uri.replace(queryParameters: <String, String> {
       'id_pelanggan': id_pelanggan,
       'jenis_pesanan': jenis_pesanan,
       'wilayah_pengiriman': wilayah_pengiriman,
+      'latitude': latitude,
+      'longitude': longitude,
     });
 
     final res = await client.get(uri, headers: {
