@@ -381,7 +381,7 @@ class _LoginState extends State<Login> {
       });
 
       SessionManager().setSession(res['data']['id'].toString(),res['data']['nama'],res['data']['no_telp'],res['data']['email']);
-      if(widget.loadPage == "Transaksi" || widget.loadPage == "Akun" || widget.loadPage == "Keranjang"){
+      if(widget.loadPage == "Transaksi" || widget.loadPage == "Akun"){
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
           builder: (context) => MainNavigation(
             loadPage: widget.loadPage,

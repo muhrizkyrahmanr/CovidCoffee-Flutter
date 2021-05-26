@@ -39,6 +39,10 @@ class TransaksiBloc{
     await _getListProdukTransaksi.drain();
     _getListProdukTransaksi.close();
   }
+
+  uploadBuktiPembayaran(Map<String, String> data){
+    return _repo.uploadBuktiPembayaran(data);
+  }
 }
 
 final transaksiBloc = TransaksiBloc();

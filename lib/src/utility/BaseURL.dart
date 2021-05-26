@@ -14,5 +14,5 @@ class BaseURL{
   static String Transaksi = domain + "transaksi";
   static String ListProdukTransaksi = domain + "listproduktransaksi";
   static String EditPelanggan = domain + "editpelanggan";
-
+  static String UploadBuktiPembayaran = domain + "uploadBuktiPembayaran";
 }

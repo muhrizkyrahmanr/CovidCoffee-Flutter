@@ -35,11 +35,6 @@ class _MainNavigationState extends State<MainNavigation> {
     } else if (widget.loadPage == "Akun") {
       _currentIndex = 2;
       page = Akun();
-    } else if (widget.loadPage == "Keranjang") {
-      page = Home(
-        loadPage: widget.loadPage,
-        id_pelanggan: widget.id_pelanggan,
-      );
     } else {
       _currentIndex = 0;
       page = Home();

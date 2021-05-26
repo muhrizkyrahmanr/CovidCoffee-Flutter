@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart' show compute;
 import 'package:covidcoffee/src/model/TransaksiModel.dart';
 import 'package:covidcoffee/src/utility/BaseURL.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 class TransaksiProvider{
   Client client = Client();
@@ -81,5 +82,17 @@ class TransaksiProvider{
       return compute(listProdukTransaksiFromJson, res.body);
     }
     return [];
+  }
+
+  Future<dynamic> uploadBuktiPembayaran(Map<String, String> data) async {
+    http.MultipartRequest request = new http.MultipartRequest("POST", Uri.parse(BaseURL.UploadBuktiPembayaran));
+    request.fields['kode_transaksi'] = data['kode_transaksi'];
+    request.fields['id_pelanggan'] = data['id_pelanggan'];
+    http.MultipartFile multipartFile = await http.MultipartFile.fromPath(
+        'foto', data['foto']);
+    request.files.add(multipartFile);
+    http.StreamedResponse response = await request.send();
+    final res = await http.Response.fromStream(response);
+    return jsonDecode(res.body);
   }
 }

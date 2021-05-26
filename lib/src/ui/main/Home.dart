@@ -97,9 +97,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Login(
-                        loadPage: "Keranjang",
-                      ),
+                      builder: (context) => Login(),
                     ),
                         (route) => false,
                   );

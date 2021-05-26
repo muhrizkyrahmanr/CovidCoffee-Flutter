@@ -1,16 +1,25 @@
 import 'dart:io';
 
+import 'package:covidcoffee/src/bloc/TransaksiBloc.dart';
+import 'package:covidcoffee/src/ui/main/MainNavigation.dart';
+import 'package:covidcoffee/src/utility/BaseURL.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 class Bayar extends StatefulWidget {
   String payment;
   String foto_bukti_pembayaran;
+  String kode_transaksi;
+  String id_pelanggan;
 
   Bayar({
     this.payment,
     this.foto_bukti_pembayaran,
+    this.kode_transaksi,
+    this.id_pelanggan,
   });
 
   @override
@@ -140,6 +149,7 @@ class _Bayar extends State<Bayar> {
       setState(() {
         _pickedImage = cropped;
       });
+      _kirimBuktiPembayaran();
     }
   }
 
@@ -173,5 +183,25 @@ class _Bayar extends State<Bayar> {
                 ],
               ),
             ));
+  }
+
+  void _kirimBuktiPembayaran() async {
+    Map<String, String> data = {
+      'kode_transaksi': widget.kode_transaksi,
+      'id_pelanggan': widget.id_pelanggan,
+      'foto': _pickedImage.path
+    };
+    final result = await transaksiBloc.uploadBuktiPembayaran(data);
+
+    if (result['status']) {
+      Fluttertoast.showToast(
+          msg: result['message']);
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+        builder: (context) => MainNavigation(
+          loadPage: "Transaksi",
+          id_pelanggan: widget.id_pelanggan,
+        ),
+      ), (route) => false);
+    }
   }
 }

@@ -21,4 +21,7 @@ class TransaksiRepo{
     return _provider.getListProdukTransaksi(kode_transaksi, id_pelanggan);
   }
 
+  Future uploadBuktiPembayaran(Map<String, String> data){
+    return _provider.uploadBuktiPembayaran(data);
+  }
 }

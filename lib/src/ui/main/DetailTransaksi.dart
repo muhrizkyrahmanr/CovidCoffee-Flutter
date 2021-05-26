@@ -157,6 +157,8 @@ class _DetailTransaksiState extends State<DetailTransaksi> {
                     Bayar(
                       payment: widget.pembayaran,
                       foto_bukti_pembayaran: widget.foto_bukti_pembayaran,
+                      kode_transaksi: widget.kode_transaksi,
+                      id_pelanggan: widget.id_pelanggan,
                     ),
                     Catatan(
                       note: widget.note,
