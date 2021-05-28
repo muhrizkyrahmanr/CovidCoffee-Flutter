@@ -25,6 +25,10 @@ class StatusPesanan extends StatelessWidget {
       isStatus = 'Pesanan Sementara Diproses';
       statusColor = Colors.blue;
       statusIcon = Icons.sync;
+    } else if (status == "Siap Dijemput") {
+      isStatus = 'Pesanan Siap Dijemput';
+      statusColor = Colors.lightBlueAccent;
+      statusIcon = Icons.store;
     } else if (status == "Dikirim") {
       isStatus = 'Pesanan Dalam Perjalanan';
       statusColor = Colors.lightBlueAccent;

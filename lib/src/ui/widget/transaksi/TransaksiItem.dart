@@ -23,6 +23,9 @@ Widget TransaksiItem({BuildContext context, AsyncSnapshot<List<TransaksiModel>> 
         } else if (data.status_transaksi == "Diproses") {
           statusColor = Colors.blue;
           statusIcon = Icons.sync;
+        } else if (data.status_transaksi == "Siap Dijemput") {
+          statusColor = Colors.blue;
+          statusIcon = Icons.store;
         } else if (data.status_transaksi == "Dikirim") {
           statusColor = Colors.lightBlueAccent;
           statusIcon = Icons.motorcycle;
